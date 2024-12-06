@@ -25,10 +25,14 @@ def notes():
     if not note:
         return jsonify({"error": "Notes not found"}), 404
     if request.method == "POST":
-        db.execute('''INSERT INTO notes
-            (user_id, discipline, date, techniques, feel_rating, insights) VALUES 
-            (?, ?, ?, ?, ?, ?)''', user_id)
-        # (1, 'bjj', '2024-12-01', 'armbar, triangle', 2, 'Focus on hip movement for triangle.'
+        data = request.get_json()
+        discipline = data.get('discipline')
+        techniques = data.get('techniques')
+        feel_rating = data.get('feel_rating')
+        insights = data.get('insights')
+        print("**********", data)
+        db.execute('''INSERT INTO notes (user_id, discipline, techniques, feel_rating, insights, date) 
+                  VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)''', user_id, discipline, techniques, feel_rating, insights)
         return "NOICE"
     else:
         return jsonify(notes)

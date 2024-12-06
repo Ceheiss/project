@@ -1,0 +1,11 @@
+.card {
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.cards {
+  display: flex;
+}
