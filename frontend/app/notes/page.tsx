@@ -1,18 +1,37 @@
+'use client'
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import './notes.css';
 
-export default async function Notes() {
+export default function Notes() {
   const url = "http://localhost:5000/notes";
-  let notes = [];
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    notes = await response.json();
-  } catch (error: any) {
-    console.error(error.message);
+   
+  // let notes = [];
+  // try {
+  //   const response = await fetch(url, { 
+  //     credentials: 'include',
+  //     mode: 'cors'
+  //   });
+  //   if (!response.ok) {
+  //     console.log(response)
+  //     throw new Error(`Response status: ${response.status}`);
+  //   }
+  //   notes = await response.json();
+  // } catch (error: any) {
+  //   console.error(error.message);
+  // }
+
+  const [notes, setNotes] = useState([]);
+
+  const fetchInfo = () => {
+    return fetch(url, { credentials: 'include'})
+      .then((res) => res.json())
+      .then((d) => setNotes(d))
   }
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
 
   return <>
     <h1>Notes</h1>
