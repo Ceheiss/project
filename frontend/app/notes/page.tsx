@@ -5,21 +5,6 @@ import './notes.css';
 
 export default function Notes() {
   const url = "http://localhost:5000/notes";
-   
-  // let notes = [];
-  // try {
-  //   const response = await fetch(url, { 
-  //     credentials: 'include',
-  //     mode: 'cors'
-  //   });
-  //   if (!response.ok) {
-  //     console.log(response)
-  //     throw new Error(`Response status: ${response.status}`);
-  //   }
-  //   notes = await response.json();
-  // } catch (error: any) {
-  //   console.error(error.message);
-  // }
 
   const [notes, setNotes] = useState([]);
 

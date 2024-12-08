@@ -27,7 +27,16 @@ db = SQL("sqlite:///app.db")
 # placeholder user
 # user_id = 1
 
+@app.route("/auth-status", methods=["GET"])
+def auth_status():
+    print("*************",session)
+    print("+++++++++++++", session["user_id"])
+    if 'user_id' in session:
+        return jsonify({'isLoggedIn': True})
+    return jsonify({'isLoggedIn': False})
+
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     return jsonify({"message": "User logged out"}), 200
