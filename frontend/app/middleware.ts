@@ -10,11 +10,9 @@ export function middleware(request) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  // Modify headers to include the session cookie and forward the request
   const modifiedResponse = NextResponse.next();
   modifiedResponse.headers.set('Cookie', `session=${cookie}`);
 
-  // You can also log the cookie to ensure it's being passed correctly
   console.log('Session Cookie:', cookie);
 
   return modifiedResponse;  // Continue with the request, forwarding the cookie

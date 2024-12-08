@@ -1,6 +1,6 @@
 from cs50 import SQL
 from flask import Flask, request, session, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -9,7 +9,7 @@ from helpers import login_required
 # Create a Flask app instance
 app = Flask(__name__)
 
-CORS(app, supports_credentials=True, origins="http://localhost:3000")
+CORS(app, supports_credentials=True)
 # app.secret_key = "12gfkk3"
 
 # Configure session to use filesystem (instead of signed cookies)
@@ -17,7 +17,6 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 # app.config["SESSION_USE_SIGNER"] = True
 app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
-app.config['SESSION_COOKIE_DOMAIN'] = '.localhost'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
 Session(app)
@@ -27,6 +26,11 @@ db = SQL("sqlite:///app.db")
 
 # placeholder user
 # user_id = 1
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return jsonify({"message": "User logged out"}), 200
 
 # Adapted from finance
 @app.route("/login", methods=["POST"])
@@ -91,7 +95,7 @@ def register():
 
 
 @app.route('/notes', methods=["GET", "POST"])
-@cross_origin(supports_credentials=True)
+@login_required
 def notes():
     print("***** request content headers:", request.headers) 
     print("***** request content cookies:", request.cookies) 

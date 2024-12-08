@@ -1,7 +1,9 @@
 'use client'
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -37,10 +39,7 @@ export default function Login() {
       const responseData = await response.json();
       console.log('Success:', responseData);
       // Clear the form or show a success message
-      setFormData({
-        username: '',
-        password: '',
-      });
+      router.push("/")
     } catch (error) {
       console.error('Error submitting the form:', error.message);
     }
