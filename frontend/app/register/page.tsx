@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import { useRouter } from 'next/navigation';
 
 export default function Register() {
@@ -17,7 +17,7 @@ export default function Register() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const payload = {
       username: formData.username,
@@ -42,7 +42,7 @@ export default function Register() {
       const responseData = await response.json();
       console.log('Success:', responseData);
       router.push("/")
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting the form:', error.message);
     }
   }

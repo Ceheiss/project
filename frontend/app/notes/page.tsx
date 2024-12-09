@@ -3,6 +3,14 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import './notes.css';
 
+interface Note {
+  id: number;
+  discipline: string;
+  techniques: string;
+  feel_rating: number;
+  insights: string;
+}
+
 export default function Notes() {
   const url = "http://localhost:5000/notes";
 
@@ -11,7 +19,7 @@ export default function Notes() {
   const fetchInfo = () => {
     return fetch(url, { credentials: 'include'})
       .then((res) => res.json())
-      .then((d) => setNotes(d))
+      .then((data) => setNotes(data))
   }
 
   useEffect(() => {
@@ -20,8 +28,9 @@ export default function Notes() {
 
   return <>
     <h1>Notes</h1>
+    <h3><Link href='notes/add'>Create a new note!</Link></h3>
     <div className="cards">
-      {notes.map((note, i) => (
+      {notes.map((note: Note) => (
           <div className="card"
               key={note.id}>
             <h3>Discipline:</h3>

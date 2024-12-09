@@ -96,7 +96,7 @@ def register():
         )
         session["user_id"] = user_id[0]["id"]
         print("User added and logged in...")
-        return jsonify({"message": "Registration successful"}), 200
+        return jsonify({"message": "Registration successful"}), 201
     except:
         print("An exception has occurred!")
         return jsonify({"error": "Something went wrong"}), 400
@@ -106,9 +106,6 @@ def register():
 @app.route('/notes', methods=["GET", "POST"])
 @login_required
 def notes():
-    print("***** request content headers:", request.headers) 
-    print("***** request content cookies:", request.cookies) 
-    print("***** Session content:", dict(session)) 
     user_id = session['user_id']
     notes = db.execute("SELECT * FROM notes WHERE user_id = ?", user_id)
     if not note:
@@ -117,17 +114,16 @@ def notes():
         data = request.get_json()
         discipline = data.get('discipline')
         techniques = data.get('techniques')
-        feel_rating = data.get('feel_rating')
+        feel_rating = data.get('feelRating')
         insights = data.get('insights')
-        print("**********", data)
         db.execute('''INSERT INTO notes (user_id, discipline, techniques, feel_rating, insights, date) 
                   VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)''', user_id, discipline, techniques, feel_rating, insights)
-        return "NOICE"
+        return jsonify({"message": "Note was added succesfuly"}), 201
     else:
         return jsonify(notes)
 
 @app.route('/notes/<int:note_id>', methods=["GET", "PUT", "DELETE"])
-def note(note_id):
+def note(note_id): 
     user_id = session['user_id']
     note = db.execute("SELECT * FROM notes WHERE user_id = ? AND id = ?", user_id, note_id)
     if not note:

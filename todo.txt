@@ -3,8 +3,8 @@ Simple list for features or next development steps:
 Frontend:
 [x] Implement context so the navbar knows always if user is logged in or not.
 [x] Use middleware (maybe) so users can only go to certain permitted route based on auth.
-[ ] Create UI to generate a new note
-[ ] Create UI to delete a note
+[x] Create UI to generate a new note
+[x] Create UI to delete a note
 [ ] Have a separate layout on the dashboard (a welcoming one for unlogged/unregistered, and some stats
 based on queries to define with visualization)
 ***** Not priority ******
@@ -12,9 +12,10 @@ based on queries to define with visualization)
 [ ] Make forms and other things look good, or at least decent
 
 API:
-[ ] Create route to add a new note to the list
-[ ] Create route to delete note
+[x] Create route to add a new note to the list
+[x] Create route to delete note
 [ ] Think of routes and queries to DB that can be helpful for the dashboard.
 
 Extras:
 [ ] Will I add something with C? Is it possible?
+[ ] Add pagination for notes and different ways to filter them

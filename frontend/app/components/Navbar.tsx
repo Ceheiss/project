@@ -63,7 +63,7 @@ export default function Navbar() {
         {/* Need to dynamically show log in and register or log out */}
         {isLoggedIn ?
           <>
-            <div onClick={handleLogout} >Log Out</div>
+            <div onClick={handleLogout}>Log Out</div>
             <Link href="/notes">Notes</Link>
           </>
          :
@@ -71,8 +71,7 @@ export default function Navbar() {
             <Link href="/login">Log In</Link>
             <Link href="/register">Register</Link>
           </>
-        }
-        
+        } 
       </div>
     </nav>
   )

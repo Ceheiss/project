@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useState, SyntheticEvent, ChangeEvent } from "react";
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
@@ -10,12 +10,12 @@ export default function Login() {
   });
 
   // Handle input changes
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const payload = {
       username: formData.username,
