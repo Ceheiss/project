@@ -38,7 +38,6 @@ export default function Login() {
   
       const responseData = await response.json();
       console.log('Success:', responseData);
-      // Clear the form or show a success message
       router.push("/")
     } catch (error) {
       console.error('Error submitting the form:', error.message);

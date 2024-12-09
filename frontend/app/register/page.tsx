@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ export default function Register() {
     password: '',
     confirmation: '',
   });
+  const url = 'http://localhost:5000/register';
+  const router = useRouter();
 
   // Handle input changes
   const handleChange = (e: any) => {
@@ -23,7 +26,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch(url, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -38,12 +41,7 @@ export default function Register() {
   
       const responseData = await response.json();
       console.log('Success:', responseData);
-      // Clear the form or show a success message
-      setFormData({
-        username: '',
-        password: '',
-        confirmation: '',
-      });
+      router.push("/")
     } catch (error) {
       console.error('Error submitting the form:', error.message);
     }

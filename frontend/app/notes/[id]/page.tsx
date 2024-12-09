@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 export default function NoteDetails({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | null>(null);
   const [note, setNote] = useState<any>(null);
-
+  const url = `http://localhost:5000/notes/${id}`;
+  
   useEffect(() => {
     async function fetchParams() {
       const resolvedParams = await params;
@@ -15,7 +16,7 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
   }, [params]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/notes/${id}`)
+    fetch(url, { credentials: 'include'})
       .then((res) => {
         return res.json();
       })
