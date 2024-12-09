@@ -15,13 +15,13 @@ export default function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const payload = {
       username: formData.username,
       password: formData.password
     }
-
+    
     try {
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
@@ -37,9 +37,12 @@ export default function Login() {
       }
   
       const responseData = await response.json();
+      // emit an event to notify the navbar
+      const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
+      window.dispatchEvent(authChange)
       console.log('Success:', responseData);
       router.push("/")
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting the form:', error.message);
     }
   }

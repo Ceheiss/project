@@ -25,7 +25,17 @@ export default function Navbar() {
       }
     }
     checkAuthStatus()
+  }, []);
+
+  useEffect(() => {
+    const handleStatusChange = (event: CustomEvent) => {
+      setLoggedIn(event.detail.isLogged);
+    }
+    window.addEventListener("authChange", handleStatusChange as EventListener);
+    // Clean up listener on unmount
+    return () => window.removeEventListener("authChange", handleStatusChange as EventListener);
   }, [])
+
 
   async function handleLogout() {
     try {
