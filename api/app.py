@@ -112,9 +112,9 @@ def notes():
         return jsonify({"error": "Notes not found"}), 404
     if request.method == "POST":
         data = request.get_json()
-        discipline = data.get('discipline')
-        techniques = data.get('techniques')
-        feel_rating = data.get('feelRating')
+        discipline = data.get('discipline').lower().strip()
+        techniques = data.get('techniques').lower().strip()
+        feel_rating = data.get('feelRating').strip()
         insights = data.get('insights')
         db.execute('''INSERT INTO notes (user_id, discipline, techniques, feel_rating, insights, date) 
                   VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)''', user_id, discipline, techniques, feel_rating, insights)
@@ -130,7 +130,16 @@ def note(note_id):
         return jsonify({"error": "Note not found"}), 404
     if request.method == "DELETE":
         db.execute("DELETE FROM notes WHERE user_id = ? AND id = ?", user_id, note_id)
-        return "deleted"
+        return jsonify({"message": "Note was deleted succesfuly"}), 201
+    if request.method == "PUT":
+        data = request.get_json()
+        discipline = data.get('discipline').lower().strip()
+        techniques = data.get('techniques').lower().strip()
+        feel_rating = data.get('feelRating')
+        insights = data.get('insights').strip()
+        print("****DATA*****", data)
+        db.execute("UPDATE notes SET discipline = ?, techniques = ?, feel_rating = ?, insights = ?  WHERE user_id = ? AND id = ?", discipline, techniques, feel_rating, insights, user_id, note_id)
+        return jsonify({"message": "Note was edited succesfuly"}), 201
     else:
         return jsonify(note)
     

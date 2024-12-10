@@ -35,12 +35,10 @@ export default function Login() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
-      const responseData = await response.json();
+
       // emit an event to notify the navbar
       const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
       window.dispatchEvent(authChange)
-      console.log('Success:', responseData);
       router.push("/")
     } catch (error: any) {
       console.error('Error submitting the form:', error.message);

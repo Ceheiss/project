@@ -21,10 +21,10 @@ export default function AddNote() {
   const handleSubmit = async(e: SyntheticEvent) => {
     e.preventDefault();
     const payload = {
-      discipline: formData.discipline,
-      techniques: formData.techniques,
+      discipline: formData.discipline.toLowerCase().trim(),
+      techniques: formData.techniques.toLowerCase().trim(),
       feelRating: Number(formData.feelRating),
-      insights: formData.insights,
+      insights: formData.insights.trim(),
     }
 
     try {
@@ -40,8 +40,6 @@ export default function AddNote() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-      const responseData = await response.json();
-      console.log('Success:', responseData);
       router.push("/notes");
     } catch (error: any) {
       console.error('Error submitting the form:', error.message);

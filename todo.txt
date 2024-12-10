@@ -5,6 +5,7 @@ Frontend:
 [x] Use middleware (maybe) so users can only go to certain permitted route based on auth.
 [x] Create UI to generate a new note
 [x] Create UI to delete a note
+[x] Create UI to edit note
 [ ] Have a separate layout on the dashboard (a welcoming one for unlogged/unregistered, and some stats
 based on queries to define with visualization)
 ***** Not priority ******
@@ -14,6 +15,7 @@ based on queries to define with visualization)
 API:
 [x] Create route to add a new note to the list
 [x] Create route to delete note
+[x] Create route and logic to edit note
 [ ] Think of routes and queries to DB that can be helpful for the dashboard.
 
 Extras:

@@ -41,6 +41,8 @@ export default function Register() {
   
       const responseData = await response.json();
       console.log('Success:', responseData);
+      const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
+      window.dispatchEvent(authChange)
       router.push("/")
     } catch (error: any) {
       console.error('Error submitting the form:', error.message);

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function NoteDetails({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | null>(null);
@@ -23,7 +24,6 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setNote(data[0]);
       });
   }, [id]);
@@ -59,6 +59,7 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
       <h3>Insights:</h3>
       <p>{note.insights}</p>
       <button onClick={handleDelete}>Delete</button>
+      <Link href={`/notes/${id}/edit`}>Edit</Link>
     </div>
   );
 }

@@ -8,7 +8,6 @@ export const config = {
 export function middleware(request: NextRequest) {
   const { pathname} = request.nextUrl;
   const cookie = request.cookies.get('session');
-  console.log("running", cookie)
   if (!cookie) {
     if (pathname === '/login' || pathname === '/register') {
       // Allow access to login and register pages
