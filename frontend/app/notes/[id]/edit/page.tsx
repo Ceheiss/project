@@ -99,7 +99,7 @@ export default function AddNote() {
       <div>
         <textarea name="insights" onChange={handleChange} value={formData.insights} placeholder="Insights"/>
       </div>  
-      <button type="submit">Edit</button>
+      <button type="submit">Save Changes</button>
     </form>
   </>
 }

@@ -3,7 +3,7 @@ from flask import Flask, request, session, jsonify
 from flask_cors import CORS
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from collections import Counter
 from helpers import login_required
 
 # Create a Flask app instance
@@ -27,10 +27,55 @@ db = SQL("sqlite:///app.db")
 # placeholder user
 # user_id = 1
 
+
+@app.route("/chart-data/frequency")
+@login_required
+def dashboard():
+    user_id = session["user_id"]
+    frequency = db.execute('''
+        SELECT 
+            strftime('%Y-%m', date) AS month,
+            COUNT(*) AS logs_count                 
+        FROM notes
+        WHERE user_id = ?
+        GROUP BY month
+        ORDER BY month
+    ''', (user_id,))
+    return jsonify(frequency)
+
+@app.route("/chart-data/disciplines")
+@login_required
+def disciplines():
+    user_id = session["user_id"]
+    disciplines = db.execute('SELECT distinct discipline, COUNT(discipline) as count FROM notes WHERE user_id = ? GROUP BY discipline', user_id)
+    return jsonify(disciplines)
+
+@app.route("/chart-data/techniques")
+@login_required
+def techniques():
+    user_id = session["user_id"]
+    techniques_data = db.execute('SELECT techniques FROM notes WHERE user_id = ?', user_id)
+    techniques = []
+    for technique in techniques_data:
+        technique_list = technique['techniques'].split(",")
+        techniques.extend(technique_list)
+    print("Counter: ", Counter(techniques))
+    return jsonify(Counter(techniques))
+
+@app.route("/chart-data/summary")
+@login_required
+def summary():
+    user_id = session["user_id"]
+    user_name = db.execute('SELECT username FROM users WHERE id = ?', user_id)
+    welcome_data = db.execute('SELECT COUNT(*) AS total, AVG(feel_rating) AS average_mood FROM notes WHERE user_id = ?', user_id)
+    return jsonify({
+        "user_name":  user_name[0]['username'],
+        "total_training": welcome_data[0]['total'],
+        "average_mood": round(welcome_data[0]['average_mood']),
+    })
+
 @app.route("/auth-status", methods=["GET"])
 def auth_status():
-    print("*************",session)
-    print("+++++++++++++", session["user_id"])
     if 'user_id' in session:
         return jsonify({'isLoggedIn': True})
     return jsonify({'isLoggedIn': False})
@@ -45,8 +90,6 @@ def logout():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    print("***** request content login headers:", request.headers) 
-    print("***** request content login cookies:", request.cookies) 
     # Forget any user_id
     session.clear()
 
@@ -114,8 +157,8 @@ def notes():
         data = request.get_json()
         discipline = data.get('discipline').lower().strip()
         techniques = data.get('techniques').lower().strip()
-        feel_rating = data.get('feelRating').strip()
-        insights = data.get('insights')
+        feel_rating = data.get('feelRating')
+        insights = data.get('insights').strip()
         db.execute('''INSERT INTO notes (user_id, discipline, techniques, feel_rating, insights, date) 
                   VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)''', user_id, discipline, techniques, feel_rating, insights)
         return jsonify({"message": "Note was added succesfuly"}), 201
@@ -137,7 +180,6 @@ def note(note_id):
         techniques = data.get('techniques').lower().strip()
         feel_rating = data.get('feelRating')
         insights = data.get('insights').strip()
-        print("****DATA*****", data)
         db.execute("UPDATE notes SET discipline = ?, techniques = ?, feel_rating = ?, insights = ?  WHERE user_id = ? AND id = ?", discipline, techniques, feel_rating, insights, user_id, note_id)
         return jsonify({"message": "Note was edited succesfuly"}), 201
     else:
@@ -151,3 +193,4 @@ def debug_session():
 # Run the app on localhost with debugging enabled
 if __name__ == '__main__':
     app.run(debug=True)
+
