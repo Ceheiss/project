@@ -7,12 +7,20 @@ import DisciplinesChart from "./components/DisciplinesChart";
 export default function Dashboard() {
 
   return (
-    <div>
+    <section className='page-container'>
       <h1>Dashboard</h1>
       <WelcomeSummary />
-      <TrainingChart />
-      <BarChart />
-      <DisciplinesChart />
-    </div>
+      <section className='primary-chart'>
+        <TrainingChart />
+      </section>
+      <section className='secondary-chart'>
+        <div>
+          <BarChart />
+        </div>
+        <div>
+          <DisciplinesChart />
+        </div>
+      </section>
+    </section>
   );
 }

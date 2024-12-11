@@ -38,9 +38,9 @@ const TrainingChart = () => {
             {
               label: 'Training Sessions',
               data: values,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+              borderColor: '#118ab2',
+              backgroundColor: '#06d6a0',
+              pointBackgroundColor: '#06d6a0',
               pointStyle: 'circle',
               pointRadius: 10,
               pointHoverRadius: 15

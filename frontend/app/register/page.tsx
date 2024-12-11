@@ -51,19 +51,19 @@ export default function Register() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-        <div>
+    <form onSubmit={handleSubmit} className='page-container'>
+        <section className="form-section">
             <input name="username" placeholder="Username" value={formData.username}
             onChange={handleChange} type="text" />
-        </div>
-        <div>
+        </section>
+        <section className="form-section">
             <input  name="password" placeholder="Password" value={formData.password}
           onChange={handleChange} type="password" />
-        </div>
-        <div>
+        </section>
+        <section className="form-section">
             <input name="confirmation" placeholder="Confirm Password" value={formData.confirmation}
           onChange={handleChange} type="password" />
-        </div>
+        </section>
         <button type="submit">Register</button>
     </form>
   )

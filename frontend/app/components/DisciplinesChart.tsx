@@ -30,16 +30,15 @@ const DisciplinesChart = () => {
               label: 'Training Sessions',
               data: values,
               backgroundColor: [
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(44, 66, 192, 0.6)'
+                '#ef476f',
+                '#073b4c',
+                '#118ab2',
+                '#ffd166',
+                '#06d6a0',
+                '#ef476f'
               ],
               borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(104, 162, 135, 1)',
+                '#171717',
               ],
               borderWidth: 1
             },

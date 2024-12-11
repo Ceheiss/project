@@ -48,7 +48,7 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
   }
 
   return (
-    <div>
+    <section className='page-container'>
       <h1>Note Details</h1>
       <h3>Discipline:</h3>
       <p>{note.discipline}</p>
@@ -58,8 +58,8 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
       <p>{note.feel_rating}</p>
       <h3>Insights:</h3>
       <p>{note.insights}</p>
-      <button onClick={handleDelete}>Delete</button>
-      <Link href={`/notes/${id}/edit`}>Edit</Link>
-    </div>
+      <button id="delete-button" onClick={handleDelete}>Delete</button>
+      <Link id="edit-link" href={`/notes/${id}/edit`}>Edit</Link>
+    </section>
   );
 }

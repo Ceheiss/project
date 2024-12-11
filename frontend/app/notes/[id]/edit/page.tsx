@@ -87,18 +87,18 @@ export default function AddNote() {
   return <>
     <h1>Edit your log</h1>
     <form className="form" onSubmit={handleSubmit}>
-      <div>
+      <section className="form-section">
         <input name="discipline" onChange={handleChange} value={formData.discipline} placeholder="Discipline"/>
-      </div>
-      <div>
+      </section>
+      <section className="form-section">
         <input name="techniques" onChange={handleChange} value={formData.techniques} placeholder="Techniques"/>
-      </div>
-      <div>
+      </section>
+      <section className="form-section">
       <input name="feelRating" onChange={handleChange} value={formData.feelRating} placeholder="0" type="number" min="0" max="4"/>
-      </div>
-      <div>
+      </section>
+      <section className="form-section">
         <textarea name="insights" onChange={handleChange} value={formData.insights} placeholder="Insights"/>
-      </div>  
+      </section>  
       <button type="submit">Save Changes</button>
     </form>
   </>

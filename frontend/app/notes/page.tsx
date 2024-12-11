@@ -27,9 +27,11 @@ export default function Notes() {
   }, []);
 
   return <>
-    <h1>Notes</h1>
-    <h3><Link href='notes/add'>Create a new note!</Link></h3>
-    <div className="cards">
+    <header>
+      <h1>Notes</h1>
+      <h3><Link href='notes/add'>Create a <span>new note!</span></Link></h3>
+    </header>
+    <section className="cards">
       {notes.map((note: Note) => (
           <div className="card"
               key={note.id}>
@@ -44,6 +46,6 @@ export default function Notes() {
             <Link href={`/notes/${note.id}`}>Details</Link>
           </div> 
       ))}
-    </div>
+    </section>
   </>
 }

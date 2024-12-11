@@ -1,11 +1,25 @@
+header {
+  margin: 15px;
+}
+
 .card {
   margin: 15px;
-  padding: 10px;
-  border: 1px solid #555;
+  padding: 20px;
+  border: 4px solid var(--sunglow);
   border-radius: 10px;
-  max-width: 400px;
+  width: 300px;
+  background: white;
+  box-shadow: 10px 10px gray;
+}
+
+.card a {
+  text-decoration: none;
+  font-weight: 800;
+  color: var(--bright-pink);
 }
 
 .cards {
   display: flex;
+  flex-wrap: wrap;
 }
+
