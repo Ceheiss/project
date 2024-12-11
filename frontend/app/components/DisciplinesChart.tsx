@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from 'chart.js';
+import { ChartData } from '../types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -12,7 +12,7 @@ interface Item {
 }
 
 const DisciplinesChart = () => {
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState<ChartData | null>(null);
   const url = 'http://localhost:5000/chart-data/disciplines';
   useEffect(() => {
     fetch(url, { credentials: 'include'})
@@ -48,18 +48,15 @@ const DisciplinesChart = () => {
       })
   }, []);
 
-  const options = {
+  const options: ChartOptions<'doughnut'> = {
     responsive: true,
     plugins: {
       legend: { position: 'top' },
       title: { display: true, text: 'Disciplines Trained' },
-    },
-    tooltip: {
-      enabled: true,
     }
   }
 
-  return chartData ? <Doughnut data={chartData} options={options as any} /> : <p>Loading...</p>;
+  return chartData ? <Doughnut data={chartData} options={options} /> : <p>Loading...</p>;
 };
 
 export default DisciplinesChart;

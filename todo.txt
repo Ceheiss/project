@@ -6,17 +6,17 @@ Frontend:
 [x] Create UI to generate a new note
 [x] Create UI to delete a note
 [x] Create UI to edit note
-[ ] Have a separate layout on the dashboard (a welcoming one for unlogged/unregistered, and some stats
-based on queries to define with visualization)
+[x] Create Layout UI and charts
 ***** Not priority ******
 [ ] Add decent logo and thumbnail
 [ ] Make forms and other things look good, or at least decent
+[ ] Take a general look to refactor components when needed
 
 API:
 [x] Create route to add a new note to the list
 [x] Create route to delete note
 [x] Create route and logic to edit note
-[ ] Think of routes and queries to DB that can be helpful for the dashboard.
+[x] Think of routes and queries to DB that can be helpful for the dashboard.
 
 Extras:
 [ ] Will I add something with C? Is it possible?

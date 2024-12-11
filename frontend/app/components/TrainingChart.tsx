@@ -10,7 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from 'chart.js';
+import { ChartData } from '../types';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
@@ -21,7 +23,7 @@ interface Item {
 }
 
 const TrainingChart = () => {
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState<ChartData | null>(null);
   const url = 'http://localhost:5000/chart-data/frequency';
   useEffect(() => {
     fetch(url, { credentials: 'include'})
@@ -48,7 +50,7 @@ const TrainingChart = () => {
       });
   }, []);
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     plugins: {
       legend: { position: 'top' },

@@ -9,12 +9,14 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from 'chart.js';
+import { ChartData } from '../types';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TechniquesChart = () => {
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState<ChartData | null>(null);
   const url = 'http://localhost:5000/chart-data/techniques';
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const TechniquesChart = () => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();
       })
-      .then((data) => {
+      .then((data: 'string[] | number[]') => {
         const labels = Object.keys(data).map((key) => key.trim()) || [];
         const values = Object.values(data);
 
@@ -57,7 +59,7 @@ const TechniquesChart = () => {
       });
   }, []);
 
-  const options = {
+  const options: ChartOptions<'bar'> = {
     responsive: true,
     plugins: {
       legend: {
@@ -75,7 +77,7 @@ const TechniquesChart = () => {
     },
   };
 
-  return chartData ? <Bar data={chartData} options={options as any} /> : <p>Loading chart...</p>;
+  return chartData ? <Bar data={chartData} options={options} /> : <p>Loading chart...</p>;
 };
 
 export default TechniquesChart;
