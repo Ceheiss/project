@@ -8,9 +8,10 @@ Frontend:
 [x] Create UI to edit note
 [x] Create Layout UI and charts
 ***** Not priority ******
-[ ] Add decent logo and thumbnail
+[x] Add decent logo and thumbnail
 [ ] Make forms and other things look good, or at least decent
 [ ] Take a general look to refactor components when needed
+[ ] Add env variables so localhost is not hardcoded
 
 API:
 [x] Create route to add a new note to the list
