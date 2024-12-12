@@ -4,14 +4,18 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function Navbar() {
   const [ isLoggedIn, setLoggedIn ] = useState(false);
   const router = useRouter();
+  const checkAuthUrl = `${baseURL}/auth-status`;
+  const logoutUrl = `${baseURL}/logout`;
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch('http://localhost:5000/auth-status', {
+        const response = await fetch(checkAuthUrl, {
           method: 'GET',
           credentials: 'include',
         });
@@ -39,7 +43,7 @@ export default function Navbar() {
 
   async function handleLogout() {
     try {
-      const response = await fetch('http://localhost:5000/logout', {
+      const response = await fetch(logoutUrl, {
         method: 'GET',
         credentials: 'include',
       });

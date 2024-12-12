@@ -2,13 +2,15 @@
 import { useState, SyntheticEvent } from "react";
 import { useRouter } from 'next/navigation';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function Register() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     confirmation: '',
   });
-  const url = 'http://localhost:5000/register';
+  const url = `${baseURL}/register`;
   const router = useRouter();
 
   // Handle input changes

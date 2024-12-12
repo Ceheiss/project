@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Spinner from "@/app/components/Spinner";
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function NoteDetails({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | null>(null);
   const [note, setNote] = useState<any>(null);
-  const url = `http://localhost:5000/notes/${id}`;
+  const url = `${baseURL}/notes/${id}`;
   const router = useRouter();
 
   useEffect(() => {

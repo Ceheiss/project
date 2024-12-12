@@ -6,6 +6,8 @@ interface SummaryData {
   average_mood: number;
 }
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const WelcomeSummary = () => {
   const [loading, setLoading] = useState(true);
   const [summaryData, setSummaryData] = useState({
@@ -13,7 +15,7 @@ const WelcomeSummary = () => {
     totalTraining: 0,
     averageMood: 0
   });
-  const url = 'http://localhost:5000/chart-data/summary';
+  const url = `${baseURL}/chart-data/summary`;
   useEffect(() => {
     async function fetchSummaryData() {
       try {

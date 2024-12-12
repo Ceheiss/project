@@ -10,6 +10,8 @@ interface EditNoteData {
   insights: string,
 }
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function AddNote() {
   const [formData, setFormData] = useState({
     discipline: '',
@@ -21,7 +23,7 @@ export default function AddNote() {
   const router = useRouter();
   const params = useParams(); // Get the ID from the URL
   const { id } = params;
-  const url = `http://localhost:5000/notes/${id}`;
+  const url = `${baseURL}/notes/${id}`;
 
 
   // Handle input changes

@@ -2,6 +2,8 @@
 import { useState, SyntheticEvent, ChangeEvent } from "react";
 import { useRouter } from 'next/navigation';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function Login() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -23,7 +25,7 @@ export default function Login() {
     }
     
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch(`${baseURL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

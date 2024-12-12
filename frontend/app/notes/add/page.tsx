@@ -3,6 +3,8 @@ import { useState, SyntheticEvent, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import './add.css';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function AddNote() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ export default function AddNote() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/notes', {
+      const response = await fetch(`${baseURL}/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

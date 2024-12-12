@@ -12,9 +12,11 @@ interface Item {
   count: number;
 }
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const DisciplinesChart = () => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
-  const url = 'http://localhost:5000/chart-data/disciplines';
+  const url = `${baseURL}/chart-data/disciplines`;
   useEffect(() => {
     fetch(url, { credentials: 'include'})
       .then((res) => {

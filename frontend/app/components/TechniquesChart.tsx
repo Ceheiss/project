@@ -14,11 +14,13 @@ import {
 import { ChartData } from '../types';
 import Spinner from './Spinner';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TechniquesChart = () => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
-  const url = 'http://localhost:5000/chart-data/techniques';
+  const url = `${baseURL}/chart-data/techniques`;
 
   useEffect(() => {
     fetch(url, { credentials: 'include' })
