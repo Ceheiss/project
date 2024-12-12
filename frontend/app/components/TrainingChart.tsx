@@ -13,6 +13,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { ChartData } from '../types';
+import Spinner from './Spinner';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
@@ -61,7 +62,7 @@ const TrainingChart = () => {
     },
   };
 
-  return chartData ? <Line data={chartData} options={options} /> : <p>Loading...</p>;
+  return chartData ? <Line data={chartData} options={options} /> : <Spinner />;
 };
 
 export default TrainingChart;

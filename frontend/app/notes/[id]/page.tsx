@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Spinner from "@/app/components/Spinner";
 
 export default function NoteDetails({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | null>(null);
@@ -44,7 +45,7 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
   }
 
   if (!note) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (

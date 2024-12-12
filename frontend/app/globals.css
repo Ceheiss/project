@@ -13,31 +13,35 @@
 }
 
 
-a{
+a {
   text-decoration: none;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato), Arial, Helvetica, sans-serif;
   margin: 0;
 }
 
 h1 {
   color: var(--bright-pink);
+  font-family: var(--font-fira-mono);
+  font-weight: 900;
   font-size: 60px;
 }
 
 h3 a {
-  font-weight: 800;
+  font-family: var(--font-lato);
+  font-weight: 700;
   font-size: 30px;
   color: var(--foreground);
 }
 
 h3 a span{
   color: var(--blue-ncs);
-  font-weight: bold;
+  font-family: var(--font-fira-mono);
+  font-weight: 700;
 }
 
 button {
@@ -84,6 +88,13 @@ button {
   width: 40%;
 }
 
+.logo-container {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  position: relative;
+}
+
 .container {
   margin: 10px;
 }
@@ -109,6 +120,12 @@ button {
   margin: 7px 0;
 }
 
+.welcome-summary h2 {
+  font-family: var(--font-fira-mono);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
 #delete-button {
   background-color: var(--bright-pink);
   margin-right: 10px;
@@ -117,6 +134,18 @@ button {
 #edit-link {
   font-weight: bold;
   color: var(--blue-ncs);
+}
+
+#username {
+  color: var(--blue-ncs);
+}
+
+#total-training {
+  color: var(--bright-pink);
+}
+
+#average-mood {
+  color: var(--midnight-green);
 }
 
 @media screen and (max-width: 800px) {
@@ -131,3 +160,24 @@ button {
     flex-wrap: wrap;
   }
 }
+
+/* Taken from https://cssloaders.github.io/ */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--emerald);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 

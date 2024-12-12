@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Spinner from '@/app/components/Spinner';
 
 interface EditNoteData {
   discipline: string,
@@ -83,7 +84,7 @@ export default function AddNote() {
       console.error('Error editing the note:', error.message);
     }
   }
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   return <>
     <h1>Edit your log</h1>
     <form className="form" onSubmit={handleSubmit}>

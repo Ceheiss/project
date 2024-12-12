@@ -12,6 +12,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { ChartData } from '../types';
+import Spinner from './Spinner';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -72,7 +73,7 @@ const TechniquesChart = () => {
     },
   };
 
-  return chartData ? <Bar data={chartData} options={options} /> : <p>Loading chart...</p>;
+  return chartData ? <Bar data={chartData} options={options} /> : <Spinner />;
 };
 
 export default TechniquesChart;

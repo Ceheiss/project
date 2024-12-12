@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image'
 
 export default function Navbar() {
   const [ isLoggedIn, setLoggedIn ] = useState(false);
@@ -55,7 +56,18 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="left">
-        <div>Logo</div>
+        <div className="logo-container">
+          <Link href="/">
+            <Image
+              src="/dojoscrolls.svg"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+              alt="A kimono and with the word dojoscrolls written to the side"
+            />
+          </Link>
+        </div>
       </div>
       <div className="right">
         <Link href="/">Home</Link>

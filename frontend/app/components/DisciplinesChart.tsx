@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { ChartData } from '../types';
+import Spinner from './Spinner';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -48,6 +49,7 @@ const DisciplinesChart = () => {
   }, []);
 
   const options: ChartOptions<'doughnut'> = {
+    animation: true,
     responsive: true,
     plugins: {
       legend: { position: 'top' },
@@ -55,7 +57,7 @@ const DisciplinesChart = () => {
     }
   }
 
-  return chartData ? <Doughnut data={chartData} options={options} /> : <p>Loading...</p>;
+  return chartData ? <Doughnut data={chartData} options={options} /> : <Spinner />;
 };
 
 export default DisciplinesChart;
