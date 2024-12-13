@@ -1,14 +1,14 @@
-'use client'
+"use client";
 import { useState, SyntheticEvent, ChangeEvent } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Login() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   // Handle input changes
@@ -21,17 +21,17 @@ export default function Login() {
     e.preventDefault();
     const payload = {
       username: formData.username,
-      password: formData.password
-    }
-    
+      password: formData.password,
+    };
+
     try {
       const response = await fetch(`${baseURL}/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -39,26 +39,37 @@ export default function Login() {
       }
 
       // emit an event to notify the navbar
-      const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
-      window.dispatchEvent(authChange)
-      router.push("/")
+      const authChange = new CustomEvent("authChange", {
+        detail: { isLogged: true },
+      });
+      window.dispatchEvent(authChange);
+      router.push("/");
     } catch (error) {
-      console.error('Error submitting the form:', error);
+      console.error("Error submitting the form:", error);
     }
-  }
-
+  };
 
   return (
-    <form onSubmit={handleSubmit} className='page-container'>
-        <section className="form-section">
-            <input name="username" placeholder="Username" value={formData.username}
-            onChange={handleChange} type="text" />
-        </section>
-        <section className="form-section">
-            <input  name="password" placeholder="Password" value={formData.password}
-          onChange={handleChange} type="password" />
-        </section>
-        <button type="submit">Log In</button>
+    <form onSubmit={handleSubmit} className="page-container">
+      <section className="form-section">
+        <input
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+          type="text"
+        />
+      </section>
+      <section className="form-section">
+        <input
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          type="password"
+        />
+      </section>
+      <button type="submit">Log In</button>
     </form>
-  )
+  );
 }

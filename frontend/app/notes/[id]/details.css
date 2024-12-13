@@ -15,7 +15,9 @@ p {
 #edit-link {
   font-weight: bold;
   color: var(--blue-ncs);
-  transition: 0.2s ease-out, filter 0.2s ease-out;
+  transition:
+    0.2s ease-out,
+    filter 0.2s ease-out;
 }
 
 #edit-link:hover {

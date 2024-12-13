@@ -8,19 +8,21 @@
   background-color: var(--emerald);
 }
 
-.navbar a, .navbar div {
+.navbar a,
+.navbar div {
   cursor: pointer;
   color: var(--midnight-green);
   text-decoration: none;
   transition: 0.2s ease-out;
 }
 
-.navbar a:hover, .navbar div:hover {
+.navbar a:hover,
+.navbar div:hover {
   color: var(--blue-ncs);
 }
 
-
-.left, .right {
+.left,
+.right {
   display: flex;
   justify-content: space-around;
   align-items: center;

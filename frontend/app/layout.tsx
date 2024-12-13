@@ -14,7 +14,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
 const firaMono = localFont({
   src: [
     {
@@ -75,15 +74,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/monogram-hq.png" sizes="any" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${firaMono.variable} ${lato.variable}  antialiased`}
       >
         <Navbar />
-        <div className="container">
-          {children}
-        </div>
+        <div className="container">{children}</div>
       </body>
     </html>
   );

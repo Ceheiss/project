@@ -12,7 +12,6 @@
   --foreground: #171717;
 }
 
-
 a {
   text-decoration: none;
 }
@@ -38,7 +37,7 @@ h3 a {
   color: var(--foreground);
 }
 
-h3 a span{
+h3 a span {
   color: var(--blue-ncs);
   font-family: var(--font-fira-mono);
   font-weight: 700;
@@ -51,7 +50,9 @@ button {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s ease-out, filter 0.2s ease-out;
+  transition:
+    0.2s ease-out,
+    filter 0.2s ease-out;
 }
 
 button:hover {
@@ -103,7 +104,6 @@ textarea {
   align-items: center;
 }
 
-
 @media screen and (max-width: 800px) {
   .navbar {
     padding: 10px;
@@ -112,9 +112,10 @@ textarea {
   .navbar .right {
     width: 80%;
   }
-  .primary-chart, .secondary-chart div  {
+  .primary-chart,
+  .secondary-chart div {
     margin: 20px 0;
-    width: 100%
+    width: 100%;
   }
   .secondary-chart {
     flex-wrap: wrap;

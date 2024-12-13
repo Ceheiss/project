@@ -1,6 +1,6 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+"use client";
+import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,19 +10,21 @@ import {
   Tooltip,
   Legend,
   ChartOptions,
-} from 'chart.js';
-import { ChartData } from '../../types';
-import Spinner from '../spinner/Spinner';
+} from "chart.js";
+import { ChartData } from "../../types";
+import Spinner from "../spinner/Spinner";
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const backgroundColors = [
-  '#118ab2',
-  '#ffd166',
-  '#06d6a0',
-  '#ef476f',
-];
+const backgroundColors = ["#118ab2", "#ffd166", "#06d6a0", "#ef476f"];
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 const TechniquesChart = () => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
@@ -31,7 +33,7 @@ const TechniquesChart = () => {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await fetch(url, { credentials: 'include' });
+        const response = await fetch(url, { credentials: "include" });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -42,32 +44,30 @@ const TechniquesChart = () => {
           labels,
           datasets: [
             {
-              label: 'Times trained',
+              label: "Times trained",
               data: values,
               backgroundColor: backgroundColors,
-              borderColor: [
-                '#073b4c',
-              ],
+              borderColor: ["#073b4c"],
               borderWidth: 1,
             },
           ],
         });
       } catch (error) {
-        console.error('Error fetching chart data:', error);
+        console.error("Error fetching chart data:", error);
       }
     };
     fetchInfo();
   }, [url]);
 
-  const options: ChartOptions<'bar'> = {
+  const options: ChartOptions<"bar"> = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top', // Removed 'as const'
+        position: "top", // Removed 'as const'
       },
       title: {
         display: true,
-        text: 'Discipline Frequency Chart',
+        text: "Discipline Frequency Chart",
       },
     },
     scales: {

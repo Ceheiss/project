@@ -1,9 +1,10 @@
-div, button {
+div,
+button {
   margin: 10px;
 }
 
 .form {
-  display: 'flex';
+  display: "flex";
   flex-direction: column;
   max-width: 300px;
 }

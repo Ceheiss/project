@@ -7,12 +7,11 @@ export interface ChartData {
     pointBackgroundColor?: string | string[];
     borderColor: string | string[];
     borderWidth?: number;
-    pointStyle?: string,
+    pointStyle?: string;
     pointRadius?: number;
     pointHoverRadius?: number;
   }[];
 }
-
 
 export interface Note {
   id?: number;
