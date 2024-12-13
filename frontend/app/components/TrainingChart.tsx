@@ -28,13 +28,17 @@ const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const TrainingChart = () => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const url = `${baseURL}/chart-data/frequency`;
+
   useEffect(() => {
-    fetch(url, { credentials: 'include'})
-      .then((res) => res.json())
-      .then((data: Item[]) => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(url, { credentials: 'include'});
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: Item[] = await response.json();
         const labels = data.map(item => item.month);
         const values = data.map(item => item.logs_count);
-
         setChartData({
           labels,
           datasets: [
@@ -50,8 +54,12 @@ const TrainingChart = () => {
             },
           ],
         });
-      });
-  }, []);
+      } catch (error) {
+        console.error('Error while getting charter data', error);
+      }
+    };
+    fetchInfo();
+  }, [url]);
 
   const options: ChartOptions<'line'> = {
     responsive: true,

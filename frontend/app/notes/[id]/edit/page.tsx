@@ -27,7 +27,7 @@ export default function AddNote() {
 
 
   // Handle input changes
-  const handleChange = (e: ChangeEvent<any>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -35,35 +35,35 @@ export default function AddNote() {
   useEffect(() => {
     async function fetchNote() {
       try {
-        const res = await fetch(url, {
+        const response = await fetch(url, {
           credentials: 'include',
-        });
-        if (!res.ok) {
-          throw new Error(`Failed to fetch note: ${res.status}`);
+        });     
+        if (!response.ok) {
+          throw new Error(`Failed to fetch note: ${response.status}`);
         }
-        const data = await res.json();
+        const data = await response.json();
         const normalizeData = (noteData: EditNoteData) => ({
           discipline: noteData.discipline,
           techniques: noteData.techniques,
-          feelRating: noteData.feel_rating,
+          feelRating: Number(noteData.feel_rating) + 1,
           insights: noteData.insights,
         });        
         setFormData(normalizeData(data[0]));
-      } catch (err: any) {
-        console.error(err.message);
+      } catch (error) {
+        console.error(error);
       }  finally {
         setLoading(false);
       }
     }
     if (id) fetchNote();
-  }, [id]);
+  }, [id, url]);
 
   const handleSubmit = async(e: SyntheticEvent) => {
     e.preventDefault();
     const payload = {
       discipline: formData.discipline.toLowerCase().trim(),
       techniques: formData.techniques.toLowerCase().trim(),
-      feelRating: formData.feelRating,
+      feelRating: Number(formData.feelRating - 1),
       insights: formData.insights.trim(),
       id
     }
@@ -82,8 +82,8 @@ export default function AddNote() {
         throw new Error(`Error editing the note: ${response.status}`);
       }
       router.push(`/notes/${id}`);
-    } catch (error: any) {
-      console.error('Error editing the note:', error.message);
+    } catch (error) {
+      console.error('Error editing the note:', error);
     }
   }
   if (loading) return <Spinner />;
@@ -91,16 +91,16 @@ export default function AddNote() {
     <h1>Edit your log</h1>
     <form className="form" onSubmit={handleSubmit}>
       <section className="form-section">
-        <input name="discipline" onChange={handleChange} value={formData.discipline} placeholder="Discipline"/>
+        <input required name="discipline" onChange={handleChange} value={formData.discipline} placeholder="Discipline"/>
       </section>
       <section className="form-section">
-        <input name="techniques" onChange={handleChange} value={formData.techniques} placeholder="Techniques"/>
+        <input required name="techniques" onChange={handleChange} value={formData.techniques} placeholder="Techniques"/>
       </section>
       <section className="form-section">
-      <input name="feelRating" onChange={handleChange} value={formData.feelRating} placeholder="0" type="number" min="0" max="4"/>
+        <input required name="feelRating" onChange={handleChange} value={formData.feelRating} placeholder="1" type="number" min="1" max="5"/>
       </section>
       <section className="form-section">
-        <textarea name="insights" onChange={handleChange} value={formData.insights} placeholder="Insights"/>
+        <textarea required name="insights" onChange={handleChange} value={formData.insights} placeholder="Insights"/>
       </section>  
       <button type="submit">Save Changes</button>
     </form>

@@ -12,18 +12,29 @@ interface Item {
   count: number;
 }
 
+const backgroundColors = [
+  '#ef476f',
+  '#073b4c',
+  '#118ab2',
+  '#ffd166',
+  '#06d6a0',
+  '#ef476f'
+];
+
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const DisciplinesChart = () => {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const url = `${baseURL}/chart-data/disciplines`;
+
   useEffect(() => {
-    fetch(url, { credentials: 'include'})
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      })
-      .then((data: Item[]) => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(url, { credentials: 'include'});
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: Item[] = await response.json();
         const labels = data.map(item => item.discipline);
         const values = data.map(item => item.count);
         setChartData({
@@ -32,14 +43,7 @@ const DisciplinesChart = () => {
             {
               label: 'Training Sessions',
               data: values,
-              backgroundColor: [
-                '#ef476f',
-                '#073b4c',
-                '#118ab2',
-                '#ffd166',
-                '#06d6a0',
-                '#ef476f'
-              ],
+              backgroundColor: backgroundColors,
               borderColor: [
                 '#171717',
               ],
@@ -47,8 +51,12 @@ const DisciplinesChart = () => {
             },
           ],
         });
-      })
-  }, []);
+      } catch (error) {
+        console.error('Error while fetching disciplines chart data:', error);
+      }
+    };
+    fetchInfo();
+  }, [url]);
 
   const options: ChartOptions<'doughnut'> = {
     animation: true,

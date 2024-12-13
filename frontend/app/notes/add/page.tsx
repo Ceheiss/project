@@ -15,7 +15,7 @@ export default function AddNote() {
   });
 
   // Handle input changes
-  const handleChange = (e: ChangeEvent<any>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -25,7 +25,7 @@ export default function AddNote() {
     const payload = {
       discipline: formData.discipline.toLowerCase().trim(),
       techniques: formData.techniques.toLowerCase().trim(),
-      feelRating: Number(formData.feelRating),
+      feelRating: Number(formData.feelRating) - 1,
       insights: formData.insights.trim(),
     }
 
@@ -43,27 +43,31 @@ export default function AddNote() {
         throw new Error(`Error: ${response.status}`);
       }
       router.push("/notes");
-    } catch (error: any) {
-      console.error('Error submitting the form:', error.message);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
     }
   }
 
-  return <>
+  return <div id="create">
     <h1>Log your training!</h1>
     <form className="form" onSubmit={handleSubmit}>
-      <div>
+      <div className="form-section">
+        <label htmlFor="discipline">What did you train (keep name consistent for better metrics): </label>
         <input name="discipline" onChange={handleChange} value={formData.discipline} placeholder="Discipline"/>
       </div>
-      <div>
+      <div className="form-section">
+        <label htmlFor="techniques">Enter the techniques your learned or practiced separated by a comma: </label>
         <input name="techniques" onChange={handleChange} value={formData.techniques} placeholder="Techniques"/>
       </div>
-      <div>
-      <input name="feelRating" onChange={handleChange} value={formData.feelRating} placeholder="0" type="number" min="0" max="4"/>
+      <div className="form-section">
+        <label htmlFor="feelRating">How did you feel this session on a scale 1 to 5? (5 is great): </label>
+        <input name="feelRating" onChange={handleChange} value={formData.feelRating} placeholder="1" type="number" min="1" max="5"/>
       </div>
-      <div>
+      <div className="form-section">
+        <label htmlFor="insights">Insights, some narration of what the session was about. Here you can explain a bit more: </label>
         <textarea name="insights" onChange={handleChange} value={formData.insights} placeholder="Insights"/>
       </div>  
       <button type="submit">Add</button>
     </form>
-  </>
+  </div>
 }

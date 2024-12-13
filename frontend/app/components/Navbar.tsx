@@ -19,17 +19,18 @@ export default function Navbar() {
           method: 'GET',
           credentials: 'include',
         });
-        if (response.ok) {
-          const data = await response.json();
-          setLoggedIn(data.isLoggedIn);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
         }
+        const data = await response.json();
+        setLoggedIn(data.isLoggedIn);
       } catch (error) {
         setLoggedIn(false);
-        console.error('Failed to get the status,', error)
+        console.error('Failed to get the status:', error)
       }
     }
     checkAuthStatus()
-  }, []);
+  }, [checkAuthUrl]);
 
   useEffect(() => {
     const handleStatusChange = (event: CustomEvent) => {
@@ -38,7 +39,7 @@ export default function Navbar() {
     window.addEventListener("authChange", handleStatusChange as EventListener);
     // Clean up listener on unmount
     return () => window.removeEventListener("authChange", handleStatusChange as EventListener);
-  }, [])
+  }, []);
 
 
   async function handleLogout() {
@@ -47,13 +48,13 @@ export default function Navbar() {
         method: 'GET',
         credentials: 'include',
       });
-
-      if (response.ok) {
-        setLoggedIn(false);
-        router.push('/login');
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
       }
-    } catch (err) {
-      console.error('Error submitting the form.');
+      setLoggedIn(false);
+      router.push('/login');
+    } catch (error) {
+      console.error('Error submitting the form.', error);
     }
   }
 

@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -9,7 +8,12 @@ const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function NoteDetails({ params }: { params: Promise<{ id: string }> }) {
   const [id, setId] = useState<string | null>(null);
-  const [note, setNote] = useState<any>(null);
+  const [note, setNote] = useState({
+    discipline: '',
+    techniques: '',
+    feel_rating: 0,
+    insights: '',
+  });
   const url = `${baseURL}/notes/${id}`;
   const router = useRouter();
 
@@ -22,14 +26,20 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
   }, [params]);
 
   useEffect(() => {
-    fetch(url, { credentials: 'include'})
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(url, { credentials: 'include'});
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
         setNote(data[0]);
-      });
-  }, [id]);
+      } catch (error) {
+        console.error('Error fetching the notes data:', error);
+      }
+    }
+    fetchInfo();
+  }, [id, url]);
 
   async function handleDelete() {
     try {
@@ -37,12 +47,12 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
         method: 'DELETE',
         credentials: 'include',
       });
-
-      if (response.ok) {
-        router.push('/notes');
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
       }
-    } catch (err) {
-      console.error('Error deleting the note.');
+      router.push('/notes');
+    } catch (error) {
+      console.error('Error deleting the note:', error);
     }
   }
 
@@ -58,7 +68,7 @@ export default function NoteDetails({ params }: { params: Promise<{ id: string }
       <h3>Techniques:</h3>
       <p>{note.techniques}</p>      
       <h3>Feel Scale:</h3>
-      <p>{note.feel_rating}</p>
+      <p>{note.feel_rating + 1}</p>
       <h3>Insights:</h3>
       <p>{note.insights}</p>
       <button id="delete-button" onClick={handleDelete}>Delete</button>

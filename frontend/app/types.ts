@@ -12,3 +12,12 @@ export interface ChartData {
     pointHoverRadius?: number;
   }[];
 }
+
+
+export interface Note {
+  id?: number;
+  discipline: string;
+  techniques: string;
+  feel_rating: number;
+  insights: string;
+}

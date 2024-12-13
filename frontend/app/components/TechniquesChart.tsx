@@ -15,6 +15,12 @@ import { ChartData } from '../types';
 import Spinner from './Spinner';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const backgroundColors = [
+  '#118ab2',
+  '#ffd166',
+  '#06d6a0',
+  '#ef476f',
+];
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -23,27 +29,22 @@ const TechniquesChart = () => {
   const url = `${baseURL}/chart-data/techniques`;
 
   useEffect(() => {
-    fetch(url, { credentials: 'include' })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      })
-      .then((data: 'string[] | number[]') => {
-        const labels = Object.keys(data).map((key) => key.trim()) || [];
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(url, { credentials: 'include' });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: string[] | number[] = await response.json();
+        const labels = Object.keys(data).map((key) => key.trim());
         const values = Object.values(data);
-
         setChartData({
           labels,
           datasets: [
             {
               label: 'Times trained',
               data: values,
-              backgroundColor: [
-                '#118ab2',
-                '#ffd166',
-                '#06d6a0',
-                '#ef476f',
-              ],
+              backgroundColor: backgroundColors,
               borderColor: [
                 '#073b4c',
               ],
@@ -51,11 +52,12 @@ const TechniquesChart = () => {
             },
           ],
         });
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching chart data:', error);
-      });
-  }, []);
+      }
+    };
+    fetchInfo();
+  }, [url]);
 
   const options: ChartOptions<'bar'> = {
     responsive: true,

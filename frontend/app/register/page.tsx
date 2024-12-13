@@ -1,5 +1,5 @@
 'use client'
-import { useState, SyntheticEvent } from "react";
+import { useState, SyntheticEvent, ChangeEvent } from "react";
 import { useRouter } from 'next/navigation';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -14,7 +14,7 @@ export default function Register() {
   const router = useRouter();
 
   // Handle input changes
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -40,14 +40,12 @@ export default function Register() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
-      const responseData = await response.json();
-      console.log('Success:', responseData);
+      
       const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
       window.dispatchEvent(authChange)
       router.push("/")
-    } catch (error: any) {
-      console.error('Error submitting the form:', error.message);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
     }
   }
 

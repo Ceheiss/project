@@ -15,18 +15,23 @@ const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Notes() {
   const url = `${baseURL}/notes`;
-
   const [notes, setNotes] = useState([]);
 
-  const fetchInfo = () => {
-    return fetch(url, { credentials: 'include'})
-      .then((res) => res.json())
-      .then((data) => setNotes(data))
-  }
-
   useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(url, { credentials: 'include'});
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        setNotes(data);
+      } catch (error) {
+        console.error('Error fetching notes data:', error);
+      }
+    }
     fetchInfo();
-  }, []);
+  }, [url]);
 
   return <>
     <header>
@@ -42,7 +47,7 @@ export default function Notes() {
             <h3>Techniques:</h3>
             <p>{note.techniques}</p>      
             <h3>Feel Scale:</h3>
-            <p>{note.feel_rating}</p>
+            <p>{note.feel_rating + 1}</p>
             <h3>Insights:</h3>
             <p>{note.insights}</p>
             <Link href={`/notes/${note.id}`}>Details</Link>

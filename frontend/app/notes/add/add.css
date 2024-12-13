@@ -7,3 +7,17 @@ div, button {
   flex-direction: column;
   max-width: 300px;
 }
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.form-section label {
+  margin-bottom: 10px;
+}
+
+#create {
+  margin-left: 15px;
+}

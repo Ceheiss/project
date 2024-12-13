@@ -42,8 +42,8 @@ export default function Login() {
       const authChange = new CustomEvent("authChange", { detail: { isLogged: true } });
       window.dispatchEvent(authChange)
       router.push("/")
-    } catch (error: any) {
-      console.error('Error submitting the form:', error.message);
+    } catch (error) {
+      console.error('Error submitting the form:', error);
     }
   }
 
