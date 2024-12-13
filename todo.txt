@@ -9,8 +9,8 @@ Frontend:
 [x] Create Layout UI and charts
 ***** Not priority ******
 [x] Add decent logo and thumbnail
-[ ] Make forms and other things look good, or at least decent
-[ ] Take a general look to refactor components when needed
+[x] Make forms and other things look good, or at least decent
+[x] Take a general look to refactor components when needed
 [x] Add env variables so localhost is not hardcoded
 
 API:

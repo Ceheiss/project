@@ -38,7 +38,11 @@ const WelcomeSummary = () => {
     fetchInfo();
   }, [url]);
 
-  return summaryData ? (
+  if (!summaryData) {
+    return <Spinner />;
+  }
+
+  return (
     <div className="welcome-summary">
       <h2>
         Hello <span id="username">{summaryData.username}</span>!
@@ -53,8 +57,6 @@ const WelcomeSummary = () => {
         <span id="average-mood">{summaryData.averageMood + 1}</span>
       </h3>
     </div>
-  ) : (
-    <Spinner />
   );
 };
 

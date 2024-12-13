@@ -1,5 +1,5 @@
 # DojoScrolls
-#### Video Demo:  <URL HERE>
+#### Video Demo:  <URL [HERE](https://www.youtube.com/watch?v=xwTVg_71zNM&ab_channel=CristobalHeiss)>
 #### Description:
 This is an application to track progress on one or more martial arts.
 A user can create an account, keep track of his training by adding information like the discipline practiced, techniques viewed, how he felt during training, and whatever other insights are relevant.
