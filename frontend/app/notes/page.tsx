@@ -1,7 +1,9 @@
 'use client'
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import './notes.css';
+import Spinner from '../components/spinner/Spinner';
 
 interface Note {
   id: number;
@@ -33,6 +35,10 @@ export default function Notes() {
     fetchInfo();
   }, [url]);
 
+  if (!notes) {
+    return <Spinner />;
+  }
+
   return <>
     <header>
       <h1>Notes</h1>
@@ -49,10 +55,10 @@ export default function Notes() {
             <h3>Feel Scale:</h3>
             <p>{note.feel_rating + 1}</p>
             <h3>Insights:</h3>
-            <p>{note.insights}</p>
+            <p id="insights">{note.insights}</p>
             <Link href={`/notes/${note.id}`}>Details</Link>
           </div> 
       ))}
     </section>
-  </>
+  </>;
 }

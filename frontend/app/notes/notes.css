@@ -23,6 +23,11 @@ h3 {
   font-family: var(--font-fira-mono);
   font-weight: 700;
   color: var(--bright-pink);
+  transition: 0.2s ease-out, filter 0.2s ease-out;
+}
+
+.card a:hover {
+  filter: brightness(110%);
 }
 
 .cards {
@@ -30,3 +35,9 @@ h3 {
   flex-wrap: wrap;
 }
 
+#insights {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

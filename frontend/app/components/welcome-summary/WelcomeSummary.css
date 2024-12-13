@@ -1,0 +1,17 @@
+.welcome-summary h2 {
+  font-family: var(--font-fira-mono);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+#username {
+  color: var(--blue-ncs);
+}
+
+#total-training {
+  color: var(--bright-pink);
+}
+
+#average-mood {
+  color: var(--midnight-green);
+}

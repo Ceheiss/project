@@ -1,8 +1,8 @@
 'use client'
-import WelcomeSummary from './components/WelcomeSummary';
-import BarChart from "./components/TechniquesChart";
-import TrainingChart from "./components/TrainingChart";
-import DisciplinesChart from "./components/DisciplinesChart";
+import WelcomeSummary from './components/welcome-summary/WelcomeSummary';
+import BarChart from "./components/techniques-chart/TechniquesChart";
+import TrainingChart from "./components/training-chart/TrainingChart";
+import DisciplinesChart from "./components/disciplines-chart/DisciplinesChart";
 
 export default function Dashboard() {
 

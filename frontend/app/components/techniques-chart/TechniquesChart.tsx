@@ -11,8 +11,8 @@ import {
   Legend,
   ChartOptions,
 } from 'chart.js';
-import { ChartData } from '../types';
-import Spinner from './Spinner';
+import { ChartData } from '../../types';
+import Spinner from '../spinner/Spinner';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const backgroundColors = [
@@ -77,7 +77,11 @@ const TechniquesChart = () => {
     },
   };
 
-  return chartData ? <Bar data={chartData} options={options} /> : <Spinner />;
+  if (!chartData) {
+    return <Spinner />;
+  }
+
+  return <Bar data={chartData} options={options} />;
 };
 
 export default TechniquesChart;

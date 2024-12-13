@@ -12,8 +12,8 @@ import {
   Legend,
   ChartOptions,
 } from 'chart.js';
-import { ChartData } from '../types';
-import Spinner from './Spinner';
+import { ChartData } from '../../types';
+import Spinner from '../spinner/Spinner';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
@@ -72,7 +72,11 @@ const TrainingChart = () => {
     },
   };
 
-  return chartData ? <Line data={chartData} options={options} /> : <Spinner />;
+  if (!chartData) {
+    return <Spinner />;
+  }
+
+  return <Line data={chartData} options={options} />;
 };
 
 export default TrainingChart;

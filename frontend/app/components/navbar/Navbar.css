@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 28px;
+  background-color: var(--emerald);
+}
+
+.navbar a, .navbar div {
+  cursor: pointer;
+  color: var(--midnight-green);
+  text-decoration: none;
+  transition: 0.2s ease-out;
+}
+
+.navbar a:hover, .navbar div:hover {
+  color: var(--blue-ncs);
+}
+
+
+.left, .right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar .right {
+  width: 40%;
+}
+
+.logo-container {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  position: relative;
+}

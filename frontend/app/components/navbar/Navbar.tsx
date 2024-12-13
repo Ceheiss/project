@@ -1,8 +1,10 @@
 'use client'
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image'
+import './Navbar.css';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 

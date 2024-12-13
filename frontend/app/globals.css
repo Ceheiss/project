@@ -51,6 +51,12 @@ button {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s ease-out, filter 0.2s ease-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+  filter: brightness(110%);
 }
 
 input {
@@ -64,44 +70,6 @@ textarea {
 
 .page-container {
   margin: 20px;
-}
-
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  padding: 28px;
-  background-color: var(--emerald);
-}
-
-.navbar a, .navbar div {
-  cursor: pointer;
-  color: var(--midnight-green);
-  text-decoration: none;
-}
-
-.navbar a:hover, .navbar div:hover {
-  color: var(--blue-ncs);
-}
-
-
-.left, .right {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.navbar .right {
-  width: 40%;
-}
-
-.logo-container {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  position: relative;
 }
 
 .container {
@@ -129,39 +97,12 @@ textarea {
   margin: 7px 0;
 }
 
-.welcome-summary h2 {
-  font-family: var(--font-fira-mono);
-  font-weight: 700;
-  color: var(--foreground);
-}
-
 .not-found-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#delete-button {
-  background-color: var(--bright-pink);
-  margin-right: 10px;
-}
-
-#edit-link {
-  font-weight: bold;
-  color: var(--blue-ncs);
-}
-
-#username {
-  color: var(--blue-ncs);
-}
-
-#total-training {
-  color: var(--bright-pink);
-}
-
-#average-mood {
-  color: var(--midnight-green);
-}
 
 @media screen and (max-width: 800px) {
   .navbar {
@@ -179,24 +120,3 @@ textarea {
     flex-wrap: wrap;
   }
 }
-
-/* Taken from https://cssloaders.github.io/ */
-.loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--emerald);
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-  }
-
-  @keyframes rotation {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(360deg);
-  }
-  } 

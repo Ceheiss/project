@@ -1,0 +1,23 @@
+p {
+  margin-bottom: 15px;
+}
+
+#insights-extended {
+  max-width: 600px;
+  text-align: justify;
+}
+
+#delete-button {
+  background-color: var(--bright-pink);
+  margin-right: 30px;
+}
+
+#edit-link {
+  font-weight: bold;
+  color: var(--blue-ncs);
+  transition: 0.2s ease-out, filter 0.2s ease-out;
+}
+
+#edit-link:hover {
+  filter: brightness(110%);
+}

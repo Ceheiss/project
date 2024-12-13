@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, SyntheticEvent, ChangeEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import Spinner from '@/app/components/Spinner';
+import Spinner from '@/app/components/spinner/Spinner';
 
 interface EditNoteData {
   discipline: string,
@@ -19,7 +19,6 @@ export default function AddNote() {
     feelRating: 0,
     insights: '',
   });
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const params = useParams(); // Get the ID from the URL
   const { id } = params;
@@ -51,8 +50,6 @@ export default function AddNote() {
         setFormData(normalizeData(data[0]));
       } catch (error) {
         console.error(error);
-      }  finally {
-        setLoading(false);
       }
     }
     if (id) fetchNote();
@@ -86,7 +83,11 @@ export default function AddNote() {
       console.error('Error editing the note:', error);
     }
   }
-  if (loading) return <Spinner />;
+
+  if (!formData) {
+    return <Spinner />;
+  }
+
   return <>
     <h1>Edit your log</h1>
     <form className="form" onSubmit={handleSubmit}>

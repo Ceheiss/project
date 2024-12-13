@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import Spinner from "../spinner/Spinner";
+import './WelcomeSummary.css';
+
 interface SummaryData {
   user_name: string;
   total_training: number;
