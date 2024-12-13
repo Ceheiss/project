@@ -5,26 +5,6 @@
 
 ![logo](/frontend/public/light-background-logo.png)
 
-DojoScrolls is an application made for martial artists. The whole idea comes from my own experience, around 3 years ago I thought started tracking my martial arts trainings just to get a glimpse about how much time I was really spending on the mats. I stored information like the date, session number (like an id), the discipline, and some description about what we did (which included some times howI felt, how was sparring, what techniques we learned and so on).
-
-Having logged well over 200 sessions, I have recollected a lot of data, but I thought it would be awesome to also have some metrics to go with it. That is how the idea for this application was born.
-
-![](/public/greeting.png)
-
-As a user, you can register to DojoScrolls and start logging your training sessions. When you log in, you will be greeted with a dashboard that will display some relevant data about your training, such as the total amount of logged sessions, average feeling (each session you record how you felt on a scale 1 to 5, 5 being great), charts that display amount of sessions per month, amount of techniques learned with which frequency, and the different disciplines trained.
-
-![](/public/charts-2.png)
-
-Where does the information comes from? From your notes. For each training session you have, you can save it through a from. In the form you will have to add the discipline trained, the techniques (comma separated) practiced, how you felt, and insights (a timestamp is added automatically on the backend).
-
-![notes](/public/notes.png)
-
-You can check all of your notes, click to get details (text gets truncated on the general display), and edit them or delete them (so notes have all CRUD operations).
-
-### Technical Aspects
-
-![logo](/frontend/public/light-background-logo.png)
-
 DojoScrolls is an application made for martial artists. The idea comes from my own experience. Around three years ago, I started tracking my martial arts training sessions to get a clearer picture of how much time I was spending on the mats. I stored information like the date, session number (like an ID), the discipline, and a description of what we did. This often included how I felt, how sparring went, what techniques we learned, and so on.
 
 Having logged well over 200 sessions, I accumulated a lot of data, but I thought it would be awesome to have some metrics to go with it. That is how the idea for this application was born.
