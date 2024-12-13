@@ -2,7 +2,7 @@
 #### Video Demo:  <URL [HERE](https://www.youtube.com/watch?v=xwTVg_71zNM&ab_channel=CristobalHeiss)>
 #### Description:
 
-![logo]('frontend/public/light-background-logo.png')
+![logo]('/frontend/public/light-background-logo.png')
 
 DojoScrolls is an application made for martial artists. The whole idea comes from my own experience, around 3 years ago I thought started tracking my martial arts trainings just to get a glimpse about how much time I was really spending on the mats. I stored information like the date, session number (like an id), the discipline, and some description about what we did (which included some times howI felt, how was sparring, what techniques we learned and so on).
 
